@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+  		<script src="http://code.jquery.com/jquery-latest.js"></script>
+    	<script src="js/bootstrap.min.js"></script>
+      <h1>{{ user.first_name }} {{ user.name }}</h1>
+      {% load staticfiles %}
+      <img src="{% static user.avatar %}" class="img-rounded"/>
+      <ul class="unstyled"> Person:
+        <li>{{ user.city }}</li>
+        <li>{{ user.country }}</li>
+        <li>{{ user.age }}</li>
+        <li>{{ user.nickname }}</li>
+
+      <h2>Name of social: {{social.name_social}}</h2>
+      <h3>Login: {{social.login}}</h3>
+      <p>Count of posts: {{ post }}
+      <p>Count of likes: {{ like }}
+      <p>Count of reposts: {{ repost }}
+      </ul>
+  </body>
+</html>

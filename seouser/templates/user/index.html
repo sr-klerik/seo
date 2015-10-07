@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>User</title>
+    {%load bootstrap3 %}
+    {% bootstrap_css %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row-fluid">
+      {% for user in users_id %}
+        <div class="col-md-12">
+          <h2>{{user.name}} {{user.first_name}}:</h2>
+            <div class="row-fluid">
+              {% load filters %}
+              <h3>Likes</h3>
+              <div class="col-md-4" style="color:{% colorist user "vk" %}">VK:{{user|likes:"vk"}}</div>
+              <div class="col-md-4" style="color:{% colorist user "fb" %}">FB:{{user|likes:"fb"}}</div>
+              <div class="col-md-4" style="color:{% colorist user "tw" %}">TW:{{user|likes:"tw"}}</div>
+            </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
