@@ -7,23 +7,38 @@ from django.db.models import Sum
 
 class PostManager(models.Manager):
 
-	def count_like(self,user,soc_bound):
-		pass
+	def count_like(self,user):
+		count = 0
+		list_of_likes = self.get_queryset().filter(user_id=user).filter(likes__gt=0)
+		for like in list_of_likes:
+			count = count + like.likes
+		return count
+
+	def count_reposts(self,user):
+		count = 0
+		list_of_repost = self.get_queryset().filter(user_id=user).filter(reposts__gt=0)
+		for repost in list_of_repost:
+			count = count + repost.reposts
+		return count
+
+	def count_posts(self,user):
+		count = 0
+		list_of_post = self.get_queryset().filter(user_id=user)
+		for post in list_of_post:
+			count +=1
+		return count
+
 
 class UserManager(models.Manager):
 
-	def likes_user(self):
-		likes=[]
-		for user in self.get_queryset().order_by('id'):
-			likes.append('{0}:{1}'.format(self.get_queryset().get(id=user.id).nickname,
-				self.get_queryset().filter(id=user.id).filter(post__social_bound='vk').aggregate(likes = Sum('post__likes'))))
-		return likes
+	def info_user(self, user):
+		return self.get_queryset().filter(nickname=user).values()[0]
 
 
 class Social_VK_Manager(models.Manager):
 
-	def info_social(self, user):
-		pass
+		def info_social(self, user):
+		    return self.get_queryset().filter(user_id=user).values()[0]
 
 
 class SeoUser(models.Model):
