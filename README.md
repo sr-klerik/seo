@@ -1,0 +1,2 @@
+# seo
+First django project
